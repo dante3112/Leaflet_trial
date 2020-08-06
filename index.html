@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+        <script src="js/leaflet-providers.js"></script>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/leaflet-search.css">
+        <link rel="stylesheet" href="css/filter.css">
+<link rel="stylesheet" href="css/nouislider.min.css">
+        <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title>Mines_AbhishekPandey</title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
+        <script src="js/leaflet-search.js"></script>
+        <script src="js/tailDT.js"></script>
+<script src="js/nouislider.min.js"></script>
+<script src="js/wNumb.js"></script>
+        <script src="data/mines_0.js"></script>
+        <script src="data/mines_1.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:3
+        }).fitBounds([[5.616958249766112,68.55933870431008],[19.469463796393185,87.21337697060136]]);
+        var hash = new L.Hash(map);
+        L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=EQhX0wN6BKUFirRtXbeM', 
+            {attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'}).addTo(map);
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        function pop_mines_0(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['STATE'] !== null ? autolinker.link(feature.properties['STATE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['DISTRICT'] !== null ? autolinker.link(feature.properties['DISTRICT'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['MINERAL'] !== null ? autolinker.link(feature.properties['MINERAL'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['AREA__HECT'] !== null ? autolinker.link(feature.properties['AREA__HECT'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['TYPE'] !== null ? autolinker.link(feature.properties['TYPE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_mines_0_0(feature) {
+            if (feature.properties['AREA__HECT'] >= 0.000000 && feature.properties['AREA__HECT'] <= 9.000000 ) {
+                return {
+                pane: 'pane_mines_0',
+                radius: 2.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 0.7,
+                fillColor: 'rgba(118,112,182,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['AREA__HECT'] >= 9.000000 && feature.properties['AREA__HECT'] <= 28.700000 ) {
+                return {
+                pane: 'pane_mines_0',
+                radius: 4.0,
+                opacity: 0.7,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 0.7,
+                fillColor: 'rgba(118,112,182,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['AREA__HECT'] >= 28.700000 && feature.properties['AREA__HECT'] <= 54.630000 ) {
+                return {
+                pane: 'pane_mines_0',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 0.7,
+                fillColor: 'rgba(118,112,182,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['AREA__HECT'] >= 54.630000 && feature.properties['AREA__HECT'] <= 84.000000 ) {
+                return {
+                pane: 'pane_mines_0',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 0.7,
+                fillColor: 'rgba(118,112,182,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['AREA__HECT'] >= 84.000000 && feature.properties['AREA__HECT'] <= 129.490000 ) {
+                return {
+                pane: 'pane_mines_0',
+                radius: 10.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 0.7,
+                fillColor: 'rgba(118,112,182,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['AREA__HECT'] >= 129.490000 && feature.properties['AREA__HECT'] <= 259.000000 ) {
+                return {
+                pane: 'pane_mines_0',
+                radius: 12.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 0.7,
+                fillColor: 'rgba(118,112,182,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['AREA__HECT'] >= 259.000000 && feature.properties['AREA__HECT'] <= 632.120000 ) {
+                return {
+                pane: 'pane_mines_0',
+                radius: 14.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 0.7,
+                fillColor: 'rgba(118,112,182,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['AREA__HECT'] >= 632.120000 && feature.properties['AREA__HECT'] <= 44121.000000 ) {
+                return {
+                pane: 'pane_mines_0',
+                radius: 16.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 0.7,
+                fillColor: 'rgba(118,112,182,1.0)',
+                interactive: true,
+            }
+            }
+        }
+        map.createPane('pane_mines_0');
+        map.getPane('pane_mines_0').style.zIndex = 400;
+        map.getPane('pane_mines_0').style['mix-blend-mode'] = 'normal';
+        var layer_mines_0 = new L.geoJson(json_mines_0, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_mines_0',
+            layerName: 'layer_mines_0',
+            pane: 'pane_mines_0',
+            onEachFeature: pop_mines_0,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_mines_0_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_mines_0);
+        map.addLayer(layer_mines_0);
+        function pop_mines_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['STATE'] !== null ? autolinker.link(feature.properties['STATE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['DISTRICT'] !== null ? autolinker.link(feature.properties['DISTRICT'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['MINERAL'] !== null ? autolinker.link(feature.properties['MINERAL'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['AREA__HECT'] !== null ? autolinker.link(feature.properties['AREA__HECT'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['TYPE'] !== null ? autolinker.link(feature.properties['TYPE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_mines_1_0(feature) {
+            switch(String(feature.properties['TYPE'])) {
+                case 'Metal':
+                    return {
+                pane: 'pane_mines_1',
+                radius: 2.8000000000000003,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 0.8,
+                fillColor: 'rgba(221,24,93,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Non-Metal':
+                    return {
+                pane: 'pane_mines_1',
+                radius: 2.8000000000000003,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 0.8,
+                fillColor: 'rgba(28,163,240,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_mines_1');
+        map.getPane('pane_mines_1').style.zIndex = 401;
+        map.getPane('pane_mines_1').style['mix-blend-mode'] = 'normal';
+        var layer_mines_1 = new L.geoJson(json_mines_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_mines_1',
+            layerName: 'layer_mines_1',
+            pane: 'pane_mines_1',
+            onEachFeature: pop_mines_1,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_mines_1_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_mines_1);
+        map.addLayer(layer_mines_1);
+        var osmGeocoder = new L.Control.Geocoder({
+            collapsed: true,
+            position: 'topleft',
+            text: 'Search',
+            title: 'Testing'
+        }).addTo(map);
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .className += ' fa fa-search';
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .title += 'Search for a place';
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'mines<br /><table><tr><td style="text-align: center;"><img src="legend/mines_1_Metal0.png" /></td><td>Metal</td></tr><tr><td style="text-align: center;"><img src="legend/mines_1_NonMetal1.png" /></td><td>Non-Metal</td></tr></table>': layer_mines_1,'mines<br /><table><tr><td style="text-align: center;"><img src="legend/mines_0_00900.png" /></td><td>0.0 - 9.0</td></tr><tr><td style="text-align: center;"><img src="legend/mines_0_902871.png" /></td><td>9.0 - 28.7</td></tr><tr><td style="text-align: center;"><img src="legend/mines_0_2875462.png" /></td><td>28.7 - 54.6</td></tr><tr><td style="text-align: center;"><img src="legend/mines_0_5468403.png" /></td><td>54.6 - 84.0</td></tr><tr><td style="text-align: center;"><img src="legend/mines_0_84012954.png" /></td><td>84.0 - 129.5</td></tr><tr><td style="text-align: center;"><img src="legend/mines_0_129525905.png" /></td><td>129.5 - 259.0</td></tr><tr><td style="text-align: center;"><img src="legend/mines_0_259063216.png" /></td><td>259.0 - 632.1</td></tr><tr><td style="text-align: center;"><img src="legend/mines_0_63214412107.png" /></td><td>632.1 - 44121.0</td></tr></table>': layer_mines_0,}).addTo(map);
+        setBounds();
+        map.addControl(new L.Control.Search({
+            layer: layer_mines_0,
+            initial: false,
+            hideMarkerOnCollapse: true,
+            propertyName: 'MINERAL'}));
+        document.getElementsByClassName('search-button')[0].className +=
+         ' fa fa-binoculars';
+        var mapDiv = document.getElementById('map');
+        var row = document.createElement('div');
+        row.className="row";
+        row.id="all";
+        row.style.height = "100%";
+        var col1 = document.createElement('div');
+        col1.className="col9";
+        col1.id = "mapWindow";
+        col1.style.height = "99%";
+        col1.style.width = "80%";
+        col1.style.display = "inline-block";
+        var col2 = document.createElement('div');
+        col2.className="col3";
+        col2.id = "menu";
+        col2.style.display = "inline-block";
+        mapDiv.parentNode.insertBefore(row, mapDiv);
+        document.getElementById("all").appendChild(col1);
+        document.getElementById("all").appendChild(col2);
+        col1.appendChild(mapDiv)
+        var Filters = {"STATE": "str","TYPE": "str"};
+        function filterFunc() {
+          map.eachLayer(function(lyr){
+          if ("options" in lyr && "dataVar" in lyr["options"]){
+            features = this[lyr["options"]["dataVar"]].features.slice(0);
+            try{
+              for (key in Filters){
+                keyS = key.replace(/[^a-zA-Z0-9_]/g, "")
+                if (Filters[key] == "str" || Filters[key] == "bool"){
+                  var selection = [];
+                  var options = document.getElementById("sel_" + keyS).options
+                  for (var i=0; i < options.length; i++) {
+                    if (options[i].selected) selection.push(options[i].value);
+                  }
+                    try{
+                      if (key in features[0].properties){
+                        for (i = features.length - 1;
+                          i >= 0; --i){
+                          if (selection.indexOf(
+                          features[i].properties[key])<0
+                          && selection.length>0) {
+                          features.splice(i,1);
+                          }
+                        }
+                      }
+                    } catch(err){
+                  }
+                }
+                if (Filters[key] == "int"){
+                  sliderVals =  document.getElementById(
+                    "div_" + keyS).noUiSlider.get();
+                  try{
+                    if (key in features[0].properties){
+                    for (i = features.length - 1; i >= 0; --i){
+                      if (parseInt(features[i].properties[key])
+                          < sliderVals[0]
+                          || parseInt(features[i].properties[key])
+                          > sliderVals[1]){
+                            features.splice(i,1);
+                          }
+                        }
+                      }
+                    } catch(err){
+                    }
+                  }
+                if (Filters[key] == "real"){
+                  sliderVals =  document.getElementById(
+                    "div_" + keyS).noUiSlider.get();
+                  try{
+                    if (key in features[0].properties){
+                    for (i = features.length - 1; i >= 0; --i){
+                      if (features[i].properties[key]
+                          < sliderVals[0]
+                          || features[i].properties[key]
+                          > sliderVals[1]){
+                            features.splice(i,1);
+                          }
+                        }
+                      }
+                    } catch(err){
+                    }
+                  }
+                if (Filters[key] == "date"
+                  || Filters[key] == "datetime"
+                  || Filters[key] == "time"){
+                  try{
+                    if (key in features[0].properties){
+                      HTMLkey = key.replace(/[&\/\\#,+()$~%.'":*?<>{} ]/g, '');
+                      startdate = document.getElementById("dat_" +
+                        HTMLkey + "_date1").value.replace(" ", "T");
+                      enddate = document.getElementById("dat_" +
+                        HTMLkey + "_date2").value.replace(" ", "T");
+                      for (i = features.length - 1; i >= 0; --i){
+                        if (features[i].properties[key] < startdate
+                          || features[i].properties[key] > enddate){
+                          features.splice(i,1);
+                        }
+                      }
+                    }
+                  } catch(err){
+                  }
+                }
+              }
+            } catch(err){
+            }
+          this[lyr["options"]["layerName"]].clearLayers();
+          this[lyr["options"]["layerName"]].addData(features);
+          }
+          })
+        }
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_STATE = document.createElement('div');
+            div_STATE.id = "div_STATE";
+            div_STATE.className= "filterselect";
+            document.getElementById("menu").appendChild(div_STATE);
+            sel_STATE = document.createElement('select');
+            sel_STATE.multiple = true;
+            sel_STATE.size = 5;
+            sel_STATE.id = "sel_STATE";
+            var STATE_options_str = "<option value='' unselected></option>";
+            sel_STATE.onchange = function(){filterFunc()};
+            STATE_options_str  += '<option value="Goa">Goa</option>';
+            STATE_options_str  += '<option value="Karnataka">Karnataka</option>';
+            STATE_options_str  += '<option value="Kerala">Kerala</option>';
+            STATE_options_str  += '<option value="Maharashtra">Maharashtra</option>';
+            STATE_options_str  += '<option value="Tamil Nadu">Tamil Nadu</option>';
+            sel_STATE.innerHTML = STATE_options_str;
+            div_STATE.appendChild(sel_STATE);
+            var lab_STATE = document.createElement('div');
+            lab_STATE.innerHTML = 'STATE';
+            lab_STATE.className = 'filterlabel';
+            div_STATE.appendChild(lab_STATE);
+            var reset_STATE = document.createElement('div');
+            reset_STATE.innerHTML = 'clear filter';
+            reset_STATE.className = 'filterlabel';
+            reset_STATE.onclick = function() {
+                var options = document.getElementById("sel_STATE").options;
+                for (var i=0; i < options.length; i++) {
+                    options[i].selected = false;
+                }
+                filterFunc();
+            };
+            div_STATE.appendChild(reset_STATE);
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_TYPE = document.createElement('div');
+            div_TYPE.id = "div_TYPE";
+            div_TYPE.className= "filterselect";
+            document.getElementById("menu").appendChild(div_TYPE);
+            sel_TYPE = document.createElement('select');
+            sel_TYPE.multiple = true;
+            sel_TYPE.size = 2;
+            sel_TYPE.id = "sel_TYPE";
+            var TYPE_options_str = "<option value='' unselected></option>";
+            sel_TYPE.onchange = function(){filterFunc()};
+            TYPE_options_str  += '<option value="Metal">Metal</option>';
+            TYPE_options_str  += '<option value="Non-Metal">Non-Metal</option>';
+            sel_TYPE.innerHTML = TYPE_options_str;
+            div_TYPE.appendChild(sel_TYPE);
+            var lab_TYPE = document.createElement('div');
+            lab_TYPE.innerHTML = 'TYPE';
+            lab_TYPE.className = 'filterlabel';
+            div_TYPE.appendChild(lab_TYPE);
+            var reset_TYPE = document.createElement('div');
+            reset_TYPE.innerHTML = 'clear filter';
+            reset_TYPE.className = 'filterlabel';
+            reset_TYPE.onclick = function() {
+                var options = document.getElementById("sel_TYPE").options;
+                for (var i=0; i < options.length; i++) {
+                    options[i].selected = false;
+                }
+                filterFunc();
+            };
+            div_TYPE.appendChild(reset_TYPE);
+        </script>
+    </body>
+</html>
